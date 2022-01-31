@@ -5,6 +5,7 @@ MENU = {
             "coffee": 18,
         },
         "cost": 1.5,
+        "internalName": "espresso",
     },
     "latte": {
         "ingredients": {
@@ -13,6 +14,7 @@ MENU = {
             "coffee": 24,
         },
         "cost": 2.5,
+        "internalName": "latte",
     },
     "cappuccino": {
         "ingredients": {
@@ -21,6 +23,7 @@ MENU = {
             "coffee": 24,
         },
         "cost": 3.0,
+        "internalName": "latte",
     }
 }
 
