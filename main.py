@@ -1,9 +1,7 @@
 from coffe_data import *
 
 # menu variables with ingredients
-espresso = MENU['espresso']
-latte = MENU['latte']
-cappuccino = MENU['cappuccino']
+menu = MENU
 
 # resources/ingredients
 # water = resources["water"]
@@ -17,7 +15,7 @@ def inventory_check(coffee_choice):
     price = coffee_choice['cost']
     water_required = int(coffee_choice['ingredients']['water'])
     coffee_required = int(coffee_choice['ingredients']['coffee'])
-    if not price == 1.5:  # creating exception to espresso, since it don't require 'milk'.
+    if not coffee_choice['internalName'] == "espresso":  # creating exception to espresso, since it don't require 'milk'.
         milk_required = int(coffee_choice['ingredients']['milk'])
 
     if water_required < int(n_resources['water']):
@@ -70,34 +68,18 @@ def coin_calculator(coffee_price):
 
 on = True
 while on:
-    customer = input("what would you like? (Espresso/Latte/Cappuccino): ").lower()
+    order = input("what would you like? (Espresso/Latte/Cappuccino): ").lower()
 
-    if customer == 'espresso':
+    if order in menu:
+        drink = menu[order]
         # function to calculate
-        available = inventory_check(espresso)
+        available = inventory_check(drink)
         if available == True:  # if enough inventory, continue
-            coin_calculator(espresso['cost'])  # checks cost of coffee against money inserted
+            coin_calculator(drink['cost'])  # checks cost of coffee against money inserted
         else:
             print(available)  # Prints reason to why the drink couldn't be served
-
-    elif customer == 'latte':
-        # function to calculate
-        available = inventory_check(latte)
-        if available == True:
-            coin_calculator(latte['cost'])
-        else:
-            print(available)
-
-    elif customer == 'cappuccino':
-        # function to calculate
-        available = inventory_check(cappuccino)
-        if available == True:
-            coin_calculator(cappuccino['cost'])
-        else:
-            print(available)
-
-
-    elif customer == 'report':
-        report()
-    elif customer == 'off':
-        on = False
+    else:
+        if order == 'report':
+            report()
+        elif order == 'off':
+            on = False
